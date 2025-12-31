@@ -30,7 +30,7 @@ python-quickbooks-online-api-demo/
 │   │   └── get_invoices_demo.py            # Query recent invoices
 │   ├── salesreceipts/
 │   │   └── get_sales_receipts_demo.py      # Query Sales Receipts
-│   └── orders/                             # (Estimates used as order alternative)
+│   └── estimates/                             # (Estimates used as order alternative)
 │       └── get_estimates_demo.py
 ├── .gitignore
 ├── LICENSE
@@ -54,22 +54,22 @@ pip install requests cryptography
 - Create or edit an app
 - Set Redirect URI to: https://localhost:8000/callback
 - Note your Client ID and Client Secret
-- Update src/auth/auth_demo.py with:
-  ```Python
-  CLIENT_ID = "YOUR_CLIENT_ID"
-  CLIENT_SECRET = "YOUR_CLIENT_SECRET"
+- You will need to provide these values during your initial run of the system
 
 ## One-Time Authentication Process
 The first time you run any demo script, it will perform the OAuth 2.0 flow:
 
-1. A browser window will open asking you to log into QuickBooks and approve access.
-2. After approving, you will be redirected to https://localhost:8000/callback?...
-3. **Copy the full redirect URL** from your browser address bar.
-4. **Paste it** when prompted in the terminal:
+1. It will ask you to supply your Client ID and Client Secret you saved earlier
+2 A browser window will open asking you to log into QuickBooks and approve access.
+3. After approving, you will be redirected to https://localhost:8000/callback?... 
+	*The page will most likely not display as it will not be able to connect, 
+	but you just need the URL in the browser's address bar.*
+4. **Copy the full redirect URL** from your browser address bar.
+5. **Paste it** when prompted in the terminal:
    ```text
-   After Connect screen, paste the full redirect URL:
-5. The script will exchange the code for tokens and save an encrypted refresh token to qbo_tokens.json.
-6. Future runs will be completely automatic (no browser or pasting needed).
+   After approval, paste the full redirect URL here:
+6. The script will exchange the code for tokens and save your IDs and an encrypted refresh token to qbo_tokens.json.
+7. Future runs will be completely automatic (no browser or pasting needed).
 
 **Important:** Never commit `qbo_tokens.json` or `encrypt.key` to Git (they are already in .gitignore).
 To reconnect to a different company (e.g., new sandbox), delete `qbo_tokens.json` and re-run any script.
